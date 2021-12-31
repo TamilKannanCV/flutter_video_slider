@@ -83,7 +83,6 @@ class _VideoSliderState extends State<VideoSlider> {
       case _TrimBoundaries.left:
         final pos = _rect.topLeft + delta;
         final diff = _getDurationDiff(pos.dx, _rect.width);
-        // 選択範囲が限界まで広がっている時に引っ張ると範囲全体が引っ張られるようにする
         if (diff == _maxDuration) {
           final pos = _rect.topLeft + delta;
           _changeTrimRect(left: pos.dx);
