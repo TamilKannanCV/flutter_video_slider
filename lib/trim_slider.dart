@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:video_slider/thumbnail_slider.dart';
 import 'package:video_slider/trim_slider_painter.dart';
-import 'package:video_slider/video_editor_controller.dart';
+import 'package:video_slider/slider_controller.dart';
 import 'package:video_player/video_player.dart';
 
 enum _TrimBoundaries { left, right, inside, progress, none }
@@ -26,7 +26,7 @@ class VideoSlider extends StatefulWidget {
   final Duration? maxDuration;
 
   ///Essential argument for the functioning of the Widget
-  final VideoEditorController controller;
+  final SliderController controller;
 
   @override
   _VideoSliderState createState() => _VideoSliderState();

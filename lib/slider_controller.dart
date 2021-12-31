@@ -1,7 +1,9 @@
 import 'dart:io';
+
 import 'package:flutter/material.dart';
-import 'package:video_slider/trim_slider_style.dart';
 import 'package:video_player/video_player.dart';
+import 'package:video_slider/input_type.dart';
+import 'package:video_slider/trim_slider_style.dart';
 
 ///_max = Offset(1.0, 1.0);
 const Offset _max = Offset(1.0, 1.0);
@@ -9,19 +11,33 @@ const Offset _max = Offset(1.0, 1.0);
 ///_min = Offset.zero;
 const Offset _min = Offset.zero;
 
-class VideoEditorController extends ChangeNotifier {
-  ///Constructs a [VideoEditorController] that edits a video from a file.
-  VideoEditorController.file(
+class SliderController extends ChangeNotifier {
+  ///Constructs a [SliderController] that edits a video from a file.
+  SliderController.file(
     this.file, {
     TrimSliderStyle? trimStyle,
   })  : _video = VideoPlayerController.file(file),
-        trimStyle = trimStyle ?? TrimSliderStyle();
+        trimStyle = trimStyle ?? TrimSliderStyle(),
+        inputType = InputType.File;
+
+  ///Constructs a [SliderController] that edits a video from an url.
+  SliderController.network(
+    this.url, {
+    TrimSliderStyle? trimStyle,
+  })  : _video = VideoPlayerController.network(url),
+        trimStyle = trimStyle ?? TrimSliderStyle(), 
+        inputType = InputType.URL;
 
   ///Style for TrimSlider
   final TrimSliderStyle trimStyle;
 
   ///Video from [File].
-  final File file;
+  late final File file;
+
+  ///Video from Url [String]
+  late final String url;
+
+  late InputType inputType;
 
   bool isTrimming = false;
 
@@ -123,5 +139,6 @@ class VideoEditorController extends ChangeNotifier {
   }
 
   ///Get the **VideoPosition** (Range is `0.0` to `1.0`).
-  double get trimPosition => videoPosition.inMilliseconds / videoDuration.inMilliseconds;
+  double get trimPosition =>
+      videoPosition.inMilliseconds / videoDuration.inMilliseconds;
 }

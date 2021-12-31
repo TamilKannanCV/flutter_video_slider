@@ -1,6 +1,7 @@
 import 'dart:typed_data';
 import 'package:flutter/material.dart';
-import 'package:video_slider/video_editor_controller.dart';
+import 'package:video_slider/input_type.dart';
+import 'package:video_slider/slider_controller.dart';
 import 'package:video_thumbnail/video_thumbnail.dart';
 
 class ThumbnailSlider extends StatefulWidget {
@@ -17,7 +18,7 @@ class ThumbnailSlider extends StatefulWidget {
   ///THUMBNAIL HEIGHT
   final double height;
 
-  final VideoEditorController controller;
+  final SliderController controller;
 
   @override
   _ThumbnailSliderState createState() => _ThumbnailSliderState();
@@ -53,7 +54,9 @@ class _ThumbnailSliderState extends State<ThumbnailSlider> {
   }
 
   Stream<List<Uint8List>> _generateThumbnails() async* {
-    final path = widget.controller.file.path;
+    final path = (widget.controller.inputType == InputType.File)
+        ? widget.controller.file.path
+        : widget.controller.url;
     final duration = widget.controller.video.value.duration.inMilliseconds;
     final eachPart = duration / _thumbnails;
     final _byteList = <Uint8List>[];

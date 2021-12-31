@@ -35,7 +35,7 @@ class _PickerPageState extends State<PickerPage> {
           onPressed: () async {
             final assets = await FilePicker.platform.pickFiles(type: FileType.video);
             if (assets != null) {
-              final controller = VideoEditorController.file(File(assets.files.single.path!));
+              final controller = SliderController.file(File(assets.files.single.path!));
               Navigator.push(
                 context,
                 MaterialPageRoute<bool>(
@@ -54,7 +54,7 @@ class _PickerPageState extends State<PickerPage> {
 class AppPage extends StatefulWidget {
   const AppPage(this.controller, {Key? key}) : super(key: key);
 
-  final VideoEditorController controller;
+  final SliderController controller;
 
   @override
   _AppPageState createState() => _AppPageState();

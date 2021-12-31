@@ -1,0 +1,4 @@
+enum InputType {
+  URL,
+  File
+}
