@@ -62,7 +62,6 @@ class _ThumbnailSliderState extends State<ThumbnailSlider> {
     final _byteList = <Uint8List>[];
     for (var i = 1; i <= _thumbnails; i++) {
       final _bytes = await VideoThumbnail.thumbnailData(
-        imageFormat: ImageFormat.JPEG,
         video: path,
         timeMs: (eachPart * i).toInt(),
         quality: widget.quality,
@@ -122,14 +121,16 @@ class _ThumbnailSliderState extends State<ThumbnailSlider> {
                       alignment: Alignment.center,
                       height: _layout.height,
                       width: _layout.width,
-                      child: Stack(children: [
-                        Image(
-                          image: MemoryImage(data[index]),
-                          width: _layout.width,
-                          height: _layout.height,
-                          alignment: Alignment.topLeft,
-                        ),
-                      ]),
+                      child: Stack(
+                        children: [
+                          Image(
+                            image: MemoryImage(data[index]),
+                            width: _layout.width,
+                            height: _layout.height,
+                            alignment: Alignment.topLeft,
+                          ),
+                        ],
+                      ),
                     );
                   },
                 )

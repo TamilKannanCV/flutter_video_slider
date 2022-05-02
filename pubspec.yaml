@@ -1,6 +1,6 @@
 name: video_slider
 description: A simple slider of video to trim by specific area.
-version: 0.0.1
+version: 0.0.2
 homepage: https://github.com/YuheiNakasaka/flutter_video_slider
 
 environment:
